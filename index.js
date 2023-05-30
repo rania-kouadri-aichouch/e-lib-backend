@@ -19,6 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false })); //URL-encoded
 const mongoose = require('mongoose');
 
 
+const cors = require('cors'); // Import the CORS middleware
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors({ origin: 'http://localhost:3000' })); // Enable CORS for requests from http://localhost:3000
 
 //get routes from route file routes.js you can call it as you like
 const routes = require('./routes/routes');
@@ -62,8 +67,8 @@ app.use("/*", (req, res) => {
 
 //server listening
 
-app.listen(3000 , () => {
+app.listen(3001 , () => {
 
-    console.log('server is runing at port 3000')
+    console.log('server is runing at port 3001')
 });
 

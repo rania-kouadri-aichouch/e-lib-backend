@@ -109,10 +109,28 @@ async function deleteBook(req, res) {
 }
 
 
+async function getBookById(req, res) {
+    
+    const id = req.params.id;
+
+    try {
+
+        const book = await Book.findById(id).populate('category');
+
+        res.status(200).send(book);
+        
+    }
+   catch(error){
+        res.status(500).json({message: error.message})
+    }
+
+}
+
 module.exports={
 
     getAllBooks,
     createBook,
     updateBook,
-    deleteBook
+    deleteBook,
+    getBookById
 }
