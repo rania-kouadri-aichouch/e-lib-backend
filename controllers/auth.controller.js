@@ -5,10 +5,10 @@ const mail = require('../utils/mail')
 
 
 // this creates a JWT token for a given user id
-const createToken =(_id) => {
+const createToken =(_id , email) => {
 
 
-    return jwt.sign({_id},process.env.SECRET , {expiresIn: '3d'})
+    return jwt.sign({_id , email},process.env.SECRET , {expiresIn: '3d'})
 
 }
 
@@ -23,7 +23,7 @@ async function login(req,res){
         const user = await User.login(email , password)
 
         //create token
-        const token  = createToken(user._id)
+        const token  = createToken(user._id , email)
         
         res.status(200).json({
             email , token
